@@ -18,9 +18,13 @@
 
 [loud-watery-place.glitch.me/api/movies/ratings/7.7/7.9](https://loud-watery-place.glitch.me/api/movies/ratings/7.7/7.9)
 
+[loud-watery-place.glitch.me/api/movies/ratings/7.9/7.7](https://loud-watery-place.glitch.me/api/movies/ratings/7.9/7.7)
+
 [loud-watery-place.glitch.me/api/movies/ratings/11/12](https://loud-watery-place.glitch.me/api/movies/ratings/11/12)
 
 [loud-watery-place.glitch.me/api/movies/year/2000/2001](https://loud-watery-place.glitch.me/api/movies/year/2000/2001)
+
+[loud-watery-place.glitch.me/api/movies/year/2001/2000](https://loud-watery-place.glitch.me/api/movies/year/2001/2000)
 
 
 
