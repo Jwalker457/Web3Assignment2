@@ -1,4 +1,4 @@
-# web2Assignment2
+# web3Assignment2
 
 // this is for login
 loud-watery-place.glitch.me/
