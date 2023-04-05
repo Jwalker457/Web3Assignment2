@@ -26,7 +26,7 @@
 
 [loud-watery-place.glitch.me/api/movies/genre/Action](https://loud-watery-place.glitch.me/api/movies/genre/Action)
 
-[loud-watery-place.glitch.me/api/movies/genre/wronggnere](https://loud-watery-place.glitch.me/api/movies/genre/wronggenre)
+[loud-watery-place.glitch.me/api/movies/genre/wronggenre](https://loud-watery-place.glitch.me/api/movies/genre/wronggenre)
 
 [loud-watery-place.glitch.me/api/movies/ratings/7.7/7.9](https://loud-watery-place.glitch.me/api/movies/ratings/7.7/7.9)
 
