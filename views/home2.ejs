@@ -12,7 +12,9 @@
       <section class="pagecontent">
         Welcome <%= user.details.firstname %> <%= user.details.lastname %>
       </section>
-      <p>Your log in was successful!</p>
+      <% if (message) { %> 
+        <p> <%= message %> </p> 
+       <% } %>
       <a href="/logout2">Logout</a>
     </div>
     <%- include('./partials/footer'); %>

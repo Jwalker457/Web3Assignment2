@@ -1,7 +1,7 @@
-require('dotenv').config(); 
+require("dotenv").config();
 const path = require("path");
-const express = require('express'); 
-const app = express(); 
+const express = require("express");
+const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const flash = require("express-flash");
@@ -10,19 +10,19 @@ const helper = require("./scripts/helpers.js");
 const ejs = require("ejs");
 require("./handlers/dataConnector.js").connect();
 
-// serves up static files from the public folder. 
-app.use(express.static('public')); 
-// also add a path to static 
-app.use('/static', express.static('public'));
+// serves up static files from the public folder.
+app.use(express.static("public"));
+// also add a path to static
+app.use("/static", express.static("public"));
 
-const Movie = require('./models/Movie');
+const Movie = require("./models/Movie");
 
 // tell node to use json and HTTP header features in body-parser
-app.use(express.urlencoded({extended: true})); 
+app.use(express.urlencoded({ extended: true }));
 
 // use the route handlers
-const movieRouter = require('./handlers/movieRouter.js'); 
-// Input movieRouter handlers here
+const movieRouter = require("./handlers/movieRouter.js");
+// Input movieRouter handlers here. 
 movieRouter.handleAllMovies(app, Movie);
 movieRouter.handleLimitMovies(app, Movie);
 movieRouter.handleMoviesTitle(app, Movie);
@@ -65,46 +65,48 @@ app.use(flash());
 // set up the passport authentication
 require("./scripts/auth.js");
 
+// 
 app.get("/", helper.ensureAuthenticated, (req, res) => {
-    res.render("home2.ejs", { user: req.user });
-  });
-
-  // login and logout routers here
-app.get("/login2", (req, res) => {
-    res.render("login2.ejs", { message: req.flash("error") });
-  });
-
-  app.post("/login2", async (req, resp, next) => {
-    // use passport authentication to see if valid login
-    passport.authenticate("localLogin", {
-      successRedirect: "/",
-      failureRedirect: "/login2",
-      failureFlash: true,
-    })(req, resp, next);
-  });
-  
-  app.get("/logout2", (req, resp) => {
-    req.logout(function (err) {
-      if (err) {
-        return next(err);
-      }
-      req.flash("success", "You have been logged out.");
-      resp.redirect("/login2");
-    });
-    // req.logout();
-    // req.flash('info', 'You were logged out');
-    // resp.render('login', {message: req.flash('info')} );
-  });
-
-//require('./handlers/dataConnector.js').connect(); 
-
-const port = process.env.port; 
-app.listen(port, () => { 
- console.log("Server running at port= " + port); 
+  res.render("home2.ejs", { user: req.user, message: "You have logged in successfully!"});
 });
 
-app.use(function (req, res, next) { 
-    res.status(404).send("Sorry can't find that!") 
-   });
+// login and logout routers here
+app.get("/login2", (req, res) => {
+  res.render("login2.ejs", { message: req.flash("error") });
+});
+
+/**
+ * 
+ * 
+ */
+app.post("/login2", async (req, resp, next) => {
+  // use passport authentication to see if valid login
+  passport.authenticate("localLogin", {
+    successRedirect: "/",
+    failureRedirect: "/login2",
+    failureFlash: true,
+  })(req, resp, next);
+});
+
+app.get("/logout2", (req, resp) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "You have been logged out.");
+    resp.render("login2.ejs", { message: req.flash("success") });
+  });
+});
+
+//require('./handlers/dataConnector.js').connect();
+
+const port = process.env.port;
+app.listen(port, () => {
+  console.log("Server running at port= " + port);
+});
+
+app.use(function (req, res, next) {
+  res.status(404).send("Sorry can't find that!");
+});
 
 //http://localhost:8080/
