@@ -65,8 +65,14 @@ app.use(flash());
 // set up the passport authentication
 require("./scripts/auth.js");
 
-// 
+/**
+ * This code handles route for the root URL ( / )
+ * The middleware ensureAthenticated is passed in to handle the authentication.
+ * cache-control is used to clear the browser cache when logging out.
+ * home2.ejs is rendered if the authentication is successful.
+ */
 app.get("/", helper.ensureAuthenticated, (req, res) => {
+  res.set("Cache-Control", "no-cache, no-store, must-revalidate"); // set cache control header
   res.render("home2.ejs", { user: req.user, message: "You have logged in successfully!"});
 });
 
@@ -76,8 +82,9 @@ app.get("/login2", (req, res) => {
 });
 
 /**
- * 
- * 
+ * This handles the login authentication using passport middleware.
+ * It redirect the user to the login page if authentication fails.
+ * If authentication succeeds it redirects the user to the home page. 
  */
 app.post("/login2", async (req, resp, next) => {
   // use passport authentication to see if valid login
@@ -88,6 +95,12 @@ app.post("/login2", async (req, resp, next) => {
   })(req, resp, next);
 });
 
+
+/**
+ * This handles the logout.
+ * It redirect the user to the login page if authentication fails.
+ * If authentication succeeds it redirects the user to the home page. 
+ */
 app.get("/logout2", (req, resp) => {
   req.logout(function (err) {
     if (err) {
